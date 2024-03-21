@@ -2,9 +2,10 @@ import express from "express"
 import { getAllCodes, getCodeById, insertNewCode } from "./index.js"
 import cors from "cors"
 import bodyParser from "body-parser"
+import 'dotenv/config'
 const app = express()
 const port=3000
-const url="http://localhost:5173"
+const url=process.env.url
 app.use(cors({
     origin:url
 }
