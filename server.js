@@ -1,8 +1,9 @@
-import express from "express"
-import { getAllCodes, getCodeById, insertNewCode } from "./index.js"
-import cors from "cors"
-import bodyParser from "body-parser"
-import 'dotenv/config'
+const express =require("express")
+const { getAllCodes, getCodeById, insertNewCode } = require("./index.js")
+const cors =require("cors")
+const  bodyParser =require("body-parser")
+
+ require('dotenv/config')
 const app = express()
 const port=3000
 const url=process.env.url
@@ -27,6 +28,9 @@ app.post("/codes/add",async (req,res)=>{
 })
 app.get("/codes/:id",async (req,res)=>{
     const id=(Number)(req.params.id)
+    if(isNaN(id))
+        res.status(404).json({"message":"error while  fetching code due to non-numerical input"})
+
     const resp=await getCodeById(id)
     res.json({code:resp})
 })
